@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarter - Our Blog</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. SETUP GLOBAL --- */
+        :root {
+            --bg-color: #FAFAFA;
+            /* Background putih bersih */
+            --text-dark: #1A1A1A;
+            /* Warna teks judul */
+            --text-grey: #666666;
+            /* Warna teks deskripsi */
+            --accent-brown: #8C6B50;
+            /* Warna tombol coklat */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Container agar konten rapi di tengah */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Tombol Utama */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-brown);
+            color: #fff;
+            padding: 15px 35px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #6d523d;
+        }
+
+        /* --- 2. NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-brown);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-brown);
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- BLOG SECTION --- */
+        .blog-section {
+            padding: 80px 50px;
+            background-color: #fff;
+            min-height: 60vh;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .blog-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-header p {
+            color: var(--text-grey);
+            font-size: 1rem;
+        }
+
+        .blog-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .blog-article {
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .blog-article:last-child {
+            border-bottom: none;
+        }
+
+        .blog-article h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            color: var(--text-grey);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .blog-meta i {
+            color: var(--accent-brown);
+        }
+
+        .blog-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-content {
+            color: var(--text-grey);
+            font-size: 1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--accent-brown);
+            font-weight: 600;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #6d523d;
+        }
+
+        /* Floating Whatsapp Button (Sesuai Screenshot) */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Scroll to Top Button */
+        #scrollTopBtn {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            bottom: 100px;
+            /* Above the WA button (approx 30px + 50px + 20px gap) */
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--accent-brown);
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollTopBtn:hover {
+            background-color: var(--text-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Ensure flex display when active via JS */
+        #scrollTopBtn.show {
+            display: flex;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-color);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .blog-header h2 {
+                font-size: 2rem;
+            }
+
+            .blog-article h3 {
+                font-size: 1.5rem;
+            }
+
+            .blog-images {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-img {
+                height: 250px;
+            }
+
+            .blog-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Quarter.</div>
+
+        <!-- Burger Icon -->
+        <div class="burger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#why-us">Why Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="blog.html" style="color: var(--accent-brown);">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-icons">
+            <a href="index.html#why-us">About</a>
+            <a href="index.html#contact">FAQ'S</a>
+            <a href="index.html#products">Order</a>
+        </div>
+    </nav>
+
+    <!-- BLOG SECTION -->
+    <section id="blog" class="blog-section">
+        <div class="blog-header">
+            <h2>Our Blog</h2>
+            <p>Discover tips, insights, and stories about wellness and self-care</p>
+        </div>
+
+        <div class="blog-container">
+            <!-- Article 1 -->
+            <article class="blog-article">
+                <h3>Bersepeda: Pelarian yang Menyehatkan di Tengah Kesibukan</h3>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> February 6, 2026</span>
+                    <span><i class="far fa-user"></i> Quarter Team</span>
+                    <span><i class="far fa-clock"></i> 8 min read</span>
+                </div>
+
+                <div class="blog-images">
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=1000&auto=format&fit=crop"
+                        alt="Bersepeda di Alam" class="blog-img">
+                    <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=1000&auto=format&fit=crop"
+                        alt="Sepeda di Pedesaan" class="blog-img">
+                </div>
+
+                <div class="blog-content">
+                    <p>Di tengah kehidupan modern yang penuh dengan berbagai tuntutan, banyak orang yang merasa
+                        kelelahan bukan cuma secara fisik tetapi lelah dari segi mental. Aktivitas yang padat biasanya
+                        sering membuat kita lupa akan pentingnya rehat sebentar untuk mengistirahatkan diri kita
+                        sendiri. Di sinilah kegiatan bersepeda bisa menjadi pilihan yang baik, kegiatan bersepeda hadir
+                        sebagai bentuk pelarian untuk diri sendiri ketika sudah merasa lelah dengan kegiatan yang sudah
+                        banyak menguras mental.</p>
+
+                    <p>Bersepeda ga cuma sekedar kegiatan fisik atau kegiatan yang menghabiskan waktu. Buat beberapa
+                        orang, bersepeda merupakan kegiatan yang bisa memberi kenyamanan untuk diri sendiri dan bentuk
+                        mencintai diri sendiri. Ketika roda berputar dan kaki mengayuh sepeda, bisa muncul perasaan
+                        yang nyaman dan bahagia yang sulit dijelaskan oleh kata-kata. Ada ketenangan yang secara
+                        tiba-tiba hadir, seakan-akan punya kesempatan untuk pikiran dan bisa bernafas dengan lebih
+                        lega.</p>
+
+                    <p>Alasan utama kenapa banyak orang yang memilih bersepeda sebagai hobi utamanya adalah karena
+                        dengan bersepeda ada kebahagiaan tersendiri yang dirasakan. Kegiatan ini menjadi salah satu
+                        bentuk untuk mencintai diri sendiri dengan cara yang sehat dan efektif. Dengan meluangkan waktu
+                        untuk bersepeda, sebagian orang sebenarnya memberikan hadiah untuk dirinya sendiri dalam bentuk
+                        waktu, perhatian, dan ketenangan jiwa.</p>
+
+                    <p>Supaya ga mengganggu kegiatan-kegiatan utama, biasanya bersepeda dilakukan pada waktu tertentu,
+                        pada sore hari saat kegiatan selesai atau di hari minggu. Sore adalah waktu yang pas buat
+                        meredakan stress setelah beraktivitas seharian. Tapi bagi sebagian orang yang hobi bersepeda,
+                        pagi hari di hari minggu memiliki waktu yang spesial karena suasananya masih terasa sangat
+                        sejuk, jalanan yang ga terlalu ramai dan tidak perlu memikirkan hal-hal berat yang membuat
+                        bersepeda jauh lebih menyenangkan.</p>
+
+                    <p>Selain memberikan ketenangan pikiran, bersepeda juga memberikan keuntungan bagi kesehatan fisik.
+                        Aktivitas ini dapat menyehatkan jantung, memperkuat massa otot, dan meningkatkan kesehatan
+                        tubuh. Yang menarik, keuntungan itu dapat dirasakan sambil menikmati perjalanan tanpa merasa
+                        tertekan. Inilah yang menjadikan bersepeda istimewa, gabungan antara olahraga dan rekreasi
+                        dalam satu kesempatan.</p>
+
+                    <p>Pada akhirnya, bersepeda adalah sesuatu yang lebih dalam daripada sekedar olahraga. Ini adalah
+                        sebuah perjalanan yang santai yang menyenangkan dan membuat pikiran menjadi lebih tenang.
+                        Dengan menentukan saat yang tepat, memilih tempat yang menyenangkan, dan mengutamakan
+                        keselamatan, bersepeda bisa menjadi metode yang paling mudah untuk merawat diri. Setiap kali
+                        kita mengayuh, kita tidak hanya bergerak maju di jalan, tetapi juga semakin dekat dengan diri
+                        kita sendiri sehingga menuju kebahagiaan yang tidak bisa diungkapkan dengan kata-kata.</p>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="blog-article">
+                <h3>Manfaat Bersepeda untuk Kesehatan Fisik dan Mental</h3>
+                <div class="blog-meta">
+                    <span><i class="far fa-calendar"></i> February 5, 2026</span>
+                    <span><i class="far fa-user"></i> Quarter Team</span>
+                    <span><i class="far fa-clock"></i> 7 min read</span>
+                </div>
+
+                <div class="blog-images">
+                    <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?q=80&w=1000&auto=format&fit=crop"
+                        alt="Manfaat Bersepeda" class="blog-img">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000&auto=format&fit=crop"
+                        alt="Bersepeda Bersama" class="blog-img">
+                </div>
+
+                <div class="blog-content">
+                    <p>Di zaman modern yang bergerak cepat ini, banyak orang merasa tertekan untuk selalu tetap
+                        produktif tanpa henti. Di sini lah bersepeda muncul sebagai pilihan yang mudah, menyenangkan,
+                        serta kaya akan manfaat. Pikiran rentan terhadap kelelahan. Tak heran jika semakin banyak orang
+                        mencari metode untuk menjaga kesehatan tanpa perlu melakoni olahraga yang berat atau sangat
+                        melelahkan.</p>
+
+                    <p>Bersepeda bukan sekadar kegiatan fisik semata. Dalam kesederhanaannya, bersepeda sering kali
+                        menjadi wujud nyata dari cinta pada diri sendiri. Saat kaki mulai memutar pedal dan angin
+                        menghembus ke wajah, muncul rasa nyaman dan ketenangan. Ada kebahagiaan karena tubuh bergerak,
+                        sekaligus kepuasan karena telah menyediakan waktu untuk diri sendiri.</p>
+
+                    <p>Salah satu daya tarik utama dari bersepeda adalah karena terbuka untuk semua kalangan. Kegiatan
+                        ini bisa dilakukan oleh siapa saja tanpa memandang usia. Anak-anak bisa bersepeda untuk
+                        meningkatkan keseimbangan serta koordinasi tubuh, remaja menggunakan aktivitas ini untuk
+                        menyalurkan energi yang berlebih, sedangkan orang dewasa menganggapnya sebagai cara untuk
+                        menghilangkan stres setelah menjalani rutinitas pekerjaan.</p>
+
+                    <p>Manfaat fisik dari aktivitas bersepeda bisa dirasakan langsung, apalagi jika dilakukan secara
+                        konsisten. Banyak orang merasakan tubuh terasa lebih enteng dan tidak gampang lelah setelah
+                        rutin bersepeda. Ini sangat berkaitan dengan peningkatan kesehatan jantung. Sebagai salah satu
+                        bentuk latihan kardiovaskular, bersepeda berkontribusi pada kelancaran sirkulasi darah dan
+                        memperbaiki fungsi jantung.</p>
+
+                    <p>Tidak hanya memberikan keuntungan untuk fisik, bersepeda juga membawa manfaat bagi kesehatan
+                        mental. Aktivitas ini telah terbukti dapat menurunkan tingkat stres dan meningkatkan suasana
+                        hati. Ketika kita bersepeda, pikiran tidak lagi terjebak dalam tuntutan pekerjaan atau
+                        persoalan sehari-hari. Konsentrasi beralih pada jalan yang dilalui, ritme pedal, dan
+                        pemandangan di sekeliling.</p>
+
+                    <p>Pemilihan waktu punya dampak besar pada kenyamanan saat bersepeda. Untuk mereka yang memiliki
+                        kesibukan di hari kerja, akhir pekan—terutama hari Minggu—adalah saat yang sangat dinanti.
+                        Bersepeda di pagi hari pada hari Minggu memberikan daya tarik yang unik. Jalanan yang umumnya
+                        sepi dan udara yang masih bebas dari polusi menjadikan pengalaman bersepeda lebih
+                        menyenangkan.</p>
+
+                    <p>Lokasi bersepeda tidak hanya mengenai keindahan alam, tetapi juga berkaitan dengan perlindungan
+                        diri. Sangat penting untuk memilih rute yang aman agar mengurangi kemungkinan terjadinya
+                        kecelakaan. Banyak pengendara sepeda lebih memilih daerah pedesaan karena kepadatannya yang
+                        lebih rendah dan atmosfer yang lebih tenang. Selain aspek keselamatan, pedesaan juga
+                        menyuguhkan pemandangan yang menakjubkan.</p>
+
+                    <p>Bersepeda dapat dilakukan secara sendirian atau dalam kelompok. Mengayuh sepeda sendirian
+                        memberi kesempatan untuk merenung dan menikmati waktu sendiri. Di sisi lain, bersepeda dengan
+                        anggota keluarga atau sahabat juga memiliki kelebihan yang unik. Kegiatan ini dapat memperkuat
+                        ikatan, menghasilkan momen berharga bersama, dan mendukung gaya hidup sehat di sekitar kita.
+                    </p>
+
+                    <p>Pada akhirnya, bersepeda lebih dari sekadar aktivitas fisik. Ini adalah investasi untuk
+                        kesehatan jasmani dan mental dalam jangka waktu panjang. Dengan manfaat yang menjangkau tubuh,
+                        pikiran, dan interaksi sosial, bersepeda menjadi opsi sempurna untuk mempertahankan keseimbangan
+                        kehidupan di era yang sibuk ini. Melalui setiap putaran pedal, kita diajarkan untuk bergerak,
+                        bernapas, dan menghargai diri kita dengan cara yang sederhana tetapi penting.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer
+        style="background-color: var(--bg-color); padding: 60px 50px 30px; border-top: 1px solid #ddd; margin-top: 0;">
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+            <div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 20px;">Quarter.</h3>
+                <p style="color: var(--text-grey); max-width: 300px;">Redefining beauty with nature and technology. Join
+                    us on our journey to better skin.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Company</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="index.html#why-us">About Us</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Support</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.html#contact">FAQ</a></li>
+                        <li><a href="index.html#contact">Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div
+            style="text-align: center; border-top: 1px solid #eee; padding-top: 30px; color: #999; font-size: 0.85rem;">
+            <p>&copy; 2026 Quarter Skincare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281946604721?text=Halo, saya tertarik dengan produk Quarter Skincare" class="wa-float"
+        target="_blank" title="Live Chat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        /* Scroll to Top Logic */
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        }
+
+        scrollTopBtn.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
